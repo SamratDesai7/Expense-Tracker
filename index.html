@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EXPENSE TRACKER</title>
+    <!-- LINK TAG TO LINK THE CSS  -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- LINK TAG TO LINK THE awesome font   -->
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+    crossorigin="anonymous"
+    />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+  </head>
+  <body>
+    <!-- HEADER TAG TO GIVE THE NAME OF THE PROJECT -->
+    <header id="title">
+    <div id="logo">
+      <img class="logo-img" src="logo.png" alt="">
+        <h1>EXPENSE TRACKER</h1>
+    </div>
+      </header>
+    <!-- MAIN CONTAINER  -->
+    <div class="container">
+      <!-- DIV WHICH CONSIST BALANCE AND ENTRY DIV`S -->
+      <div class="balance-entry-container">
+        <!-- BALANCE CONTAINER WHICH SHOWS THE TOTAL BALANCE  -->
+        <div class="border-balance">
+          <div class="balance-container">
+            <h2 class="balance-label">Your Balance</h2>
+            <h2 id="balance" class="balance">$0.00</h2>
+            <!-- INCOME AND EXPENSE CONTAINER  -->
+            <div class="inc-exp-container">
+              <!-- DIV TO SHOW THE GAINS OF AMOUNT  -->
+              <div>
+                <h4>Gains</h4>
+                <p id="money-plus" class="money plus">+$0.00</p>
+              </div>
+              <div>
+                <h4>Expenses</h4>
+                <p id="money-minus" class="money minus">-$0.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- HERE WE GET THE VALUES FROM THE USER USING INPUT TAGS -->
+        <div class="entry-border">
+        <div class="entry">
+          <form id="form">
+            <div class="form">
+            <div class="form-control">
+              <label for="text" class="label">Description</label>
+              <input type="text" id="text" placeholder="Enter description" />
+            </div>
+            <div class="form-control">
+              <label for="amount" class="label">Amount</label>
+                <small>(-100 = Expense, 100 = Gains)</small>
+              <input type="number" id="amount" placeholder="Enter amount" />
+            </div>
+            <div class="form-control">
+              <label for="text" class="label">Date</label>
+              <input type="date" id="date" />
+            </div>
+            <button class="btn">Add Transaction</button>
+            </div>
+          </form> 
+        </div>
+      </div>
+      </div>
+      <!-- HERE ALL THE TRANSACTIONS ARE  GET STORED IN AN UNORDERED LIST  -->
+      <div class="transactions">
+        <h1>TRANSACTIONS</h1>
+        <ul id="list" class="list">
+        
+        </ul>
+      </div>
+      <footer id="footer">
+        <div id="COPYRIGHT">
+          <p class="copyright-text"> &copy; 2024 EXPENSE TRACKER. All Rights Reserved. | Designed by Samrat Desai</p>
+        </div>
+      </footer>
+    </div>
+      <!-- FOOTER WHICH CONSIST THE COPYRIGHT PART  -->
+      <footer id="footer-responsive">
+        <div id="COPYRIGHT">
+          <p class="copyright-text"> &copy; 2024 EXPENSE TRACKER. All Rights Reserved. | Designed by Samrat Desai</p>
+        </div>
+      </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
