@@ -1,2 +1,1 @@
-# MINI-PROJECT
-mini project bca II
+Expense tracker
