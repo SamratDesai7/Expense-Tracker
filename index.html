@@ -1,96 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EXPENSE TRACKER</title>
-    <!-- LINK TAG TO LINK THE CSS  -->
-    <link rel="stylesheet" href="style.css" />
-    <!-- LINK TAG TO LINK THE awesome font   -->
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-    crossorigin="anonymous"
-    />
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
-  </head>
-  <body>
-    <!-- HEADER TAG TO GIVE THE NAME OF THE PROJECT -->
-    <header id="title">
-    <div id="logo">
-      <img class="logo-img" src="logo.png" alt="">
-        <h1>EXPENSE TRACKER</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Custom Style -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f1f5f9;
+      color: #2e3a59;
+    }
+
+    header {
+      background-color: #2e3a59;
+      color: white;
+      padding: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo-img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .card {
+      border: none;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .balance-value {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #10b981;
+    }
+
+    .btn-primary {
+      background-color: #10b981;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #0e9e6e;
+    }
+
+    .list-group-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f9fafb;
+      border-left: 5px solid transparent;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .list-group-item.plus {
+      border-left-color: #10b981;
+    }
+
+    .list-group-item.minus {
+      border-left-color: #ef4444;
+    }
+
+    .delete-btn {
+      background: none;
+      border: none;
+      color: #ef4444;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      color: #b91c1c;
+    }
+
+    footer {
+      background-color: #2e3a59;
+      color: #e5e7eb;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* Transaction List Styling */
+    #list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    #list li {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      margin-bottom: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-left: 6px solid #ccc;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+    }
+
+    #list li:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Specific color borders for transaction types */
+    #list li.plus {
+      border-left-color: #10b981;
+      /* Green for income */
+    }
+
+    #list li.minus {
+      border-left-color: #ef4444;
+      /* Red for expense */
+    }
+
+    /* Child spans for layout inside li */
+    #list li span {
+      flex: 1;
+      min-width: 100px;
+      text-align: center;
+      font-weight: 500;
+      color: #2e3a59;
+    }
+
+    #list li span:nth-child(2) {
+      font-weight: 600;
+    }
+
+    #list li span:nth-child(3) {
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    #list .delete {
+      text-align: right;
+      flex: 0 0 auto;
+    }
+
+    .delete-btn {
+      background: none;
+      border: none;
+      color: #ef4444;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .delete-btn:hover {
+      color: #b91c1c;
+    }
+
+    @media screen and (max-width: 400px) {
+      #list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      #list li span {
+        text-align: left;
+        min-width: unset;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="text-center">
+    <div class="container d-flex justify-content-center align-items-center gap-3">
+      <img src="logo.png" class="logo-img" alt="Logo" />
+      <h1 class="h4 mb-0">Expense Tracker</h1>
     </div>
-      </header>
-    <!-- MAIN CONTAINER  -->
-    <div class="container">
-      <!-- DIV WHICH CONSIST BALANCE AND ENTRY DIV`S -->
-      <div class="balance-entry-container">
-        <!-- BALANCE CONTAINER WHICH SHOWS THE TOTAL BALANCE  -->
-        <div class="border-balance">
-          <div class="balance-container">
-            <h2 class="balance-label">Your Balance</h2>
-            <h2 id="balance" class="balance">$0.00</h2>
-            <!-- INCOME AND EXPENSE CONTAINER  -->
-            <div class="inc-exp-container">
-              <!-- DIV TO SHOW THE GAINS OF AMOUNT  -->
-              <div>
-                <h4>Gains</h4>
-                <p id="money-plus" class="money plus">+$0.00</p>
-              </div>
-              <div>
-                <h4>Expenses</h4>
-                <p id="money-minus" class="money minus">-$0.00</p>
-              </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container my-5">
+    <div class="row g-4">
+      <!-- Balance Summary -->
+      <div class="col-lg-6">
+        <div class="card p-4">
+          <h5 class="text-center text-secondary mb-3">Your Balance</h5>
+          <h2 id="balance" class="text-center balance-value">$0.00</h2>
+          <div class="row mt-4 text-center">
+            <div class="col">
+              <h6 class="text-muted">Gains</h6>
+              <p id="money-plus" class="text-success fw-semibold">+$0.00</p>
+            </div>
+            <div class="col">
+              <h6 class="text-muted">Expenses</h6>
+              <p id="money-minus" class="text-danger fw-semibold">-$0.00</p>
             </div>
           </div>
         </div>
-        <!-- HERE WE GET THE VALUES FROM THE USER USING INPUT TAGS -->
-        <div class="entry-border">
-        <div class="entry">
+      </div>
+
+      <!-- Add Transaction Form -->
+      <div class="col-lg-6">
+        <div class="card p-4">
+          <h5 class="text-center text-secondary mb-3">Add Transaction</h5>
           <form id="form">
-            <div class="form">
-            <div class="form-control">
-              <label for="text" class="label">Description</label>
-              <input type="text" id="text" placeholder="Enter description" />
+            <div class="mb-3">
+              <label for="text" class="form-label">Description</label>
+              <input type="text" id="text" class="form-control" placeholder="E.g. Groceries" required />
             </div>
-            <div class="form-control">
-              <label for="amount" class="label">Amount</label>
-                <small>(-100 = Expense, 100 = Gains)</small>
-              <input type="number" id="amount" placeholder="Enter amount" />
+            <div class="mb-3">
+              <label for="amount" class="form-label">Amount</label>
+              <input type="number" id="amount" class="form-control" placeholder="E.g. -100 for expense, 100 for gain"
+                required />
             </div>
-            <div class="form-control">
-              <label for="text" class="label">Date</label>
-              <input type="date" id="date" />
+            <div class="mb-3">
+              <label for="date" class="form-label">Date</label>
+              <input type="date" id="date" class="form-control" required />
             </div>
-            <button class="btn">Add Transaction</button>
+            <div class="d-grid">
+              <button class="btn btn-primary" type="submit">
+                <i class="fas fa-plus-circle me-1"></i> Add Transaction
+              </button>
             </div>
-          </form> 
+          </form>
         </div>
       </div>
-      </div>
-      <!-- HERE ALL THE TRANSACTIONS ARE  GET STORED IN AN UNORDERED LIST  -->
-      <div class="transactions">
-        <h1>TRANSACTIONS</h1>
-        <ul id="list" class="list">
-        
-        </ul>
-      </div>
-      <footer id="footer">
-        <div id="COPYRIGHT">
-          <p class="copyright-text"> &copy; 2024 EXPENSE TRACKER. All Rights Reserved. | Designed by Samrat Desai</p>
+
+      <!-- Transactions List -->
+      <div class="col-12">
+        <div class="card p-4">
+          <h5 class="text-center text-secondary mb-3">Transaction History</h5>
+          <ul id="list" class="list-group">
+            <!-- Transactions will be appended here -->
+          </ul>
         </div>
-      </footer>
+      </div>
     </div>
-      <!-- FOOTER WHICH CONSIST THE COPYRIGHT PART  -->
-      <footer id="footer-responsive">
-        <div id="COPYRIGHT">
-          <p class="copyright-text"> &copy; 2024 EXPENSE TRACKER. All Rights Reserved. | Designed by Samrat Desai</p>
-        </div>
-      </footer>
-    <script src="script.js"></script>
-  </body>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <p class="mb-0">© 2024 Expense Tracker. All Rights Reserved. | Designed by <strong>Samrat Desai</strong></p>
+  </footer>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- App Script -->
+  <script src="script.js"></script>
+</body>
+
 </html>
