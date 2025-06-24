@@ -38,13 +38,10 @@ Whether you're managing a small budget or building your first financial app, thi
 
 ---
 
-## 📸 Preview
+## 🚀 Live Demo
 
-> You can host it on GitHub Pages or Netlify and add a live link here.
+[![View on GitHub Pages](https://img.shields.io/badge/Live%20Site-Click%20Here-10B981?style=for-the-badge&logo=github)](https://samratdesai7.github.io/Expense-Tracker/)
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/your-screenshot-path" alt="Expense Tracker Screenshot" width="600"/>
-</p>
 
 ---
 
